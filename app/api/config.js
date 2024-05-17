@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://re4ster.nomoredomainswork.ru'
+export const BASE_URL = 'https://re4ster.nomoredomainswork.ru/api'
 
 export const endpoints = {
   games: `${BASE_URL}/games`,
