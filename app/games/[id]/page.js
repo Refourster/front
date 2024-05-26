@@ -1,6 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
+import { endpoints } from "../../api/config";
+import {
+  getNormalizedGameDataById,
+  isResponseOk,
+  checkIfUserVoted,
+  vote,
+} from "../../api/api-utils";
+import { GameNotFound } from "@/app/components/GameNotFound/GameNotFound";
+import { Preloader } from "@/app/components/Preloader/Preloader";
+import { useState, useEffect } from "react";
 import { useStore } from "@/app/store/app-store";
+
+import Styles from "./Game.module.css";
 
 export default function GamePage(props) {
   const [game, setGame] = useState(null);
@@ -9,7 +20,6 @@ export default function GamePage(props) {
   const authContext = useStore();
 
   useEffect(() => {
-    authContext.checkAuth();
     async function fetchData() {
       const game = await getNormalizedGameDataById(
         endpoints.games,
@@ -19,28 +29,8 @@ export default function GamePage(props) {
       setPreloaderVisible(false);
     }
     fetchData();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  }, [props.params.id, authContext]);
-
-=======
   }, []);
   
->>>>>>> parent of 379b1b7 (1)
-=======
-  }, []);
-  
->>>>>>> parent of 379b1b7 (1)
-=======
-  }, []);
-  
->>>>>>> parent of 379b1b7 (1)
-=======
-  }, []);
-  
->>>>>>> parent of 379b1b7 (1)
   useEffect(() => {
     authContext.user && game ? setIsVoted(checkIfUserVoted(game, authContext.user.id)) : setIsVoted(false);
   }, [authContext.user, game]);
@@ -54,31 +44,15 @@ export default function GamePage(props) {
     const response = await vote(
       `${endpoints.games}/${game.id}`,
       jwt,
-      { users: usersIdArray }
+      usersIdArray
     );
     if (isResponseOk(response)) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      setGame((prevGame) => ({
-        ...prevGame,
-        users: [...prevGame.users, authContext.user],
-      }));
-=======
-=======
->>>>>>> parent of 379b1b7 (1)
-=======
->>>>>>> parent of 379b1b7 (1)
-=======
->>>>>>> parent of 379b1b7 (1)
       setGame(() => {
         return {
           ...game,
           users: [...game.users, authContext.user],
         };
       });
->>>>>>> parent of 379b1b7 (1)
       setIsVoted(true);
     }
   };
