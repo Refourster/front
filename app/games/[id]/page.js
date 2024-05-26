@@ -22,8 +22,13 @@ export default function GamePage(props) {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   }, [props.params.id, authContext]);
 
+=======
+  }, []);
+  
+>>>>>>> parent of 379b1b7 (1)
 =======
   }, []);
   
@@ -55,11 +60,14 @@ export default function GamePage(props) {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       setGame((prevGame) => ({
         ...prevGame,
         users: [...prevGame.users, authContext.user],
       }));
 =======
+=======
+>>>>>>> parent of 379b1b7 (1)
 =======
 >>>>>>> parent of 379b1b7 (1)
 =======
