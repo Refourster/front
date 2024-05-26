@@ -28,18 +28,19 @@ export default function GamePage(props) {
       setPreloaderVisible(false);
     }
     fetchData();
+<<<<<<< HEAD
   }, [props.params.id, authContext]);
 
+=======
+  }, []);
+  
+>>>>>>> parent of 379b1b7 (1)
   useEffect(() => {
-    if (authContext.user && game) {
-      setIsVoted(checkIfUserVoted(game, authContext.user.id));
-    } else {
-      setIsVoted(false);
-    }
+    authContext.user && game ? setIsVoted(checkIfUserVoted(game, authContext.user.id)) : setIsVoted(false);
   }, [authContext.user, game]);
 
   const handleVote = async () => {
-    const jwt = authContext.token;
+    const jwt = authContext.token
     let usersIdArray = game.users.length
       ? game.users.map((user) => user.id)
       : [];
@@ -50,10 +51,19 @@ export default function GamePage(props) {
       { users: usersIdArray }
     );
     if (isResponseOk(response)) {
+<<<<<<< HEAD
       setGame((prevGame) => ({
         ...prevGame,
         users: [...prevGame.users, authContext.user],
       }));
+=======
+      setGame(() => {
+        return {
+          ...game,
+          users: [...game.users, authContext.user],
+        };
+      });
+>>>>>>> parent of 379b1b7 (1)
       setIsVoted(true);
     }
   };
