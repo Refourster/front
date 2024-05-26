@@ -17,13 +17,19 @@ export const useStore = create((set) => ({
     checkAuth: async () => {
         const jwt = getJWT();
         if (jwt) {
-            const user = await getMe(endpoints.me, jwt);
-            if (user) {
-              set({ isAuth: true, user, token: jwt });
-              setJWT(jwt);
-            } else {
-              set({ isAuth: false, user: null, token: null });
-              removeJWT();
+            try {
+                const user = await getMe(endpoints.me, jwt);
+                if (user) {
+                    set({ isAuth: true, user, token: jwt });
+                    setJWT(jwt);
+                } else {
+                    set({ isAuth: false, user: null, token: null });
+                    removeJWT();
+                }
+            } catch (error) {
+                console.error("Failed to check authentication", error);
+                set({ isAuth: false, user: null, token: null });
+                removeJWT();
             }
         } else {
             set({ isAuth: false, user: null, token: null });
