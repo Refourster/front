@@ -20,8 +20,13 @@ export default function GamePage(props) {
     }
     fetchData();
 <<<<<<< HEAD
+<<<<<<< HEAD
   }, [props.params.id, authContext]);
 
+=======
+  }, []);
+  
+>>>>>>> parent of 379b1b7 (1)
 =======
   }, []);
   
@@ -43,11 +48,14 @@ export default function GamePage(props) {
     );
     if (isResponseOk(response)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
       setGame((prevGame) => ({
         ...prevGame,
         users: [...prevGame.users, authContext.user],
       }));
 =======
+=======
+>>>>>>> parent of 379b1b7 (1)
       setGame(() => {
         return {
           ...game,
