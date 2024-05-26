@@ -1,17 +1,5 @@
-"use client";
-import { endpoints } from "../../api/config";
-import {
-  getNormalizedGameDataById,
-  isResponseOk,
-  checkIfUserVoted,
-  vote,
-} from "../../api/api-utils";
-import { GameNotFound } from "@/app/components/GameNotFound/GameNotFound";
-import { Preloader } from "@/app/components/Preloader/Preloader";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useStore } from "@/app/store/app-store";
-
-import Styles from "./Game.module.css";
 
 export default function GamePage(props) {
   const [game, setGame] = useState(null);
@@ -20,6 +8,7 @@ export default function GamePage(props) {
   const authContext = useStore();
 
   useEffect(() => {
+    authContext.checkAuth();
     async function fetchData() {
       const game = await getNormalizedGameDataById(
         endpoints.games,
@@ -29,7 +18,7 @@ export default function GamePage(props) {
       setPreloaderVisible(false);
     }
     fetchData();
-  }, [props.params.id]);
+  }, [props.params.id, authContext]);
 
   useEffect(() => {
     if (authContext.user && game) {
@@ -48,15 +37,13 @@ export default function GamePage(props) {
     const response = await vote(
       `${endpoints.games}/${game.id}`,
       jwt,
-      usersIdArray
+      { users: usersIdArray }
     );
     if (isResponseOk(response)) {
-      setGame((prevGame) => {
-        return {
-          ...prevGame,
-          users: [...prevGame.users, authContext.user],
-        };
-      });
+      setGame((prevGame) => ({
+        ...prevGame,
+        users: [...prevGame.users, authContext.user],
+      }));
       setIsVoted(true);
     }
   };
