@@ -31,8 +31,16 @@ export default function GamePage(props) {
     fetchData();
   }, []);
   
+  
   useEffect(() => {
-    authContext.user && game ? setIsVoted(checkIfUserVoted(game, authContext.user.id)) : setIsVoted(false);
+    const fetchData = async () => {
+      if (authContext.user && game) {
+        setIsVoted(await checkIfUserVoted(game, authContext.user.id));
+      } else {
+        setIsVoted(false);
+      }
+    };
+    fetchData();
   }, [authContext.user, game]);
 
   const handleVote = async () => {
