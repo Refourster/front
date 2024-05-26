@@ -8,7 +8,7 @@ import {
 } from "../../api/api-utils";
 import { GameNotFound } from "@/app/components/GameNotFound/GameNotFound";
 import { Preloader } from "@/app/components/Preloader/Preloader";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useStore } from "react";
 import Styles from "./Game.module.css";
 
 export default function GamePage(props) {
