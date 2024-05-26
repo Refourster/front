@@ -97,11 +97,8 @@ export const getMe = async (url, jwt) => {
   }
 }
 
-export const checkIfUserVoted = async (game, userId) => {
-  console.log("Checking if user voted...");
-  const userVoted = game.users.some((user) => user.id === userId);
-  console.log("User voted:", userVoted);
-  return userVoted;
+export const checkIfUserVoted = (game, userId) => {
+  return game.users.find((user) => user.id === userId)
 }
 
 export const vote = async (url, jwt, usersArray) => {

@@ -6,11 +6,12 @@ import {
   checkIfUserVoted,
   vote,
 } from "../../api/api-utils";
+
+import { useStore } from "@/app/store/app-store";
+import { useEffect, useState } from "react";
 import { GameNotFound } from "@/app/components/GameNotFound/GameNotFound";
 import { Preloader } from "@/app/components/Preloader/Preloader";
-import { useState, useEffect } from "react";
-import { useStore } from "@/app/store/app-store";
-
+import { getNormalizedGameDataById, isResponseOk, checkIfUserVoted, vote } from "../../api/api-utils";
 import Styles from "./Game.module.css";
 
 export default function GamePage(props) {
