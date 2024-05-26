@@ -1,12 +1,5 @@
 "use client";
 import { endpoints } from "../../api/config";
-import {
-  getNormalizedGameDataById,
-  isResponseOk,
-  checkIfUserVoted,
-  vote,
-} from "../../api/api-utils";
-
 import { useStore } from "@/app/store/app-store";
 import { useEffect, useState } from "react";
 import { GameNotFound } from "@/app/components/GameNotFound/GameNotFound";
