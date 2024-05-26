@@ -29,14 +29,18 @@ export default function GamePage(props) {
       setPreloaderVisible(false);
     }
     fetchData();
-  }, []);
-  
+  }, [props.params.id]);
+
   useEffect(() => {
-    authContext.user && game ? setIsVoted(checkIfUserVoted(game, authContext.user.id)) : setIsVoted(false);
+    if (authContext.user && game) {
+      setIsVoted(checkIfUserVoted(game, authContext.user.id));
+    } else {
+      setIsVoted(false);
+    }
   }, [authContext.user, game]);
 
   const handleVote = async () => {
-    const jwt = authContext.token
+    const jwt = authContext.token;
     let usersIdArray = game.users.length
       ? game.users.map((user) => user.id)
       : [];
@@ -47,10 +51,10 @@ export default function GamePage(props) {
       usersIdArray
     );
     if (isResponseOk(response)) {
-      setGame(() => {
+      setGame((prevGame) => {
         return {
-          ...game,
-          users: [...game.users, authContext.user],
+          ...prevGame,
+          users: [...prevGame.users, authContext.user],
         };
       });
       setIsVoted(true);
