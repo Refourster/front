@@ -1,6 +1,15 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useStore } from "@/app/store/app-store";
+import { endpoints } from "../../api/config";
+import {
+  getNormalizedGameDataById,
+  isResponseOk,
+  checkIfUserVoted,
+  vote,
+} from "../../api/api-utils";
+import { GameNotFound } from "@/app/components/GameNotFound/GameNotFound";
+import { Preloader } from "@/app/components/Preloader/Preloader";
+import { useState, useEffect } from "react";
+import Styles from "./Game.module.css";
 
 export default function GamePage(props) {
   const [game, setGame] = useState(null);
