@@ -29,6 +29,4 @@ export const useStore = create((set) => ({
             set({ isAuth: false, user: null, token: null });
         }
     },
-})); 
-
-useStore.getState().checkAuth();
+}));
