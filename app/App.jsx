@@ -13,7 +13,7 @@ export const App = (props) => {
 
   useEffect(() => {
     store.checkAuth();
-  }, []);
+  }, [store.checkAuth]);
 
   return (
     <>
